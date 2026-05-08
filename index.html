@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IslandMe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --sand:        #faf4e6;
+      --sand-mid:    #ede0c4;
+      --golden:      #c99050;
+      --coral:       #c96b52;
+      --teal-deep:   #1a5f68;
+      --teal-mid:    #237f8e;
+      --teal-light:  #50bfcc;
+      --white:       #ffffff;
+      --ink:         #1e2d2a;
+      --text-warm:   #5a3e28;
+      --text-muted:  #7a9a9e;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      background-color: var(--sand);
+      color: var(--ink);
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: linear-gradient(170deg, #0b2e38 0%, #1a5f68 55%, #2a9aaa 100%);
+      color: var(--white);
+      text-align: center;
+      padding: 6rem 2rem 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 60% 30%, rgba(201,144,80,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 70px;
+      background: var(--sand);
+      clip-path: ellipse(58% 100% at 50% 100%);
+    }
+
+    .logo-mark {
+      font-family: 'Lato', sans-serif;
+      font-weight: 300;
+      font-size: 0.75rem;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: var(--teal-light);
+      margin-bottom: 1.25rem;
+      display: block;
+    }
+
+    header h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.5rem, 10vw, 7rem);
+      font-weight: 300;
+      letter-spacing: 0.04em;
+      line-height: 1;
+      margin-bottom: 1.5rem;
+    }
+
+    header h1 em {
+      font-style: italic;
+      color: var(--teal-light);
+    }
+
+    .tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      color: rgba(255,255,255,0.7);
+      max-width: 480px;
+      margin: 0 auto 0.5rem;
+      font-weight: 300;
+    }
+
+    .sub-tagline {
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      color: rgba(255,255,255,0.35);
+      text-transform: uppercase;
+    }
+
+    /* ── SHARED ── */
+    .section-wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 5.5rem 2rem;
+    }
+
+    .eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--teal-mid);
+      margin-bottom: 0.6rem;
+      display: block;
+    }
+
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 300;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+
+    .section-intro {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.15rem;
+      color: var(--text-warm);
+      margin-bottom: 3rem;
+      max-width: 560px;
+    }
+
+    /* ── FEATURES ── */
+    #features {
+      background: var(--sand);
+    }
+
+    .coming-soon-badge {
+      display: inline-block;
+      background: transparent;
+      color: var(--golden);
+      border: 1px solid var(--golden);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0.2em 0.8em;
+      border-radius: 999px;
+      vertical-align: middle;
+      margin-left: 0.85rem;
+      position: relative;
+      top: -3px;
+      font-family: 'Lato', sans-serif;
+      font-weight: 400;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .feature-card {
+      background: var(--white);
+      border: 1px solid var(--sand-mid);
+      border-radius: 16px;
+      padding: 2.25rem 1.75rem 2rem;
+      text-align: center;
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+
+    .feature-card:hover {
+      box-shadow: 0 12px 36px rgba(30, 45, 42, 0.1);
+      transform: translateY(-4px);
+    }
+
+    .feature-icon {
+      font-size: 2.25rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .feature-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--teal-deep);
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-card p {
+      font-size: 0.9rem;
+      color: #6b8080;
+      line-height: 1.65;
+    }
+
+    /* ── WAVE DIVIDER ── */
+    .wave-divider {
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+    }
+    .wave-divider svg {
+      display: block;
+      width: 100%;
+    }
+
+    /* ── SOUND SECTION ── */
+    #sound {
+      background: linear-gradient(170deg, #0e3a42 0%, #1a5f68 55%, #1f8a7a 100%);
+      color: var(--white);
+      max-width: 100%;
+      padding: 0;
+      position: relative;
+    }
+
+    #sound::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background: var(--sand);
+      clip-path: ellipse(58% 100% at 50% 100%);
+    }
+
+    #sound .eyebrow { color: var(--teal-light); }
+    #sound h2 { color: var(--white); }
+    #sound .section-intro { color: rgba(255,255,255,0.65); }
+
+    .sound-body {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    @media (max-width: 680px) {
+      .sound-body { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+
+    .sound-copy p {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.82);
+      margin-bottom: 1.4rem;
+      line-height: 1.85;
+    }
+
+    .sound-copy p:last-child { margin-bottom: 0; }
+
+    .sound-copy strong {
+      color: var(--teal-light);
+      font-weight: 400;
+    }
+
+    .sound-copy .pull-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.35rem;
+      color: rgba(255,255,255,0.9);
+      border-left: 2px solid var(--golden);
+      padding-left: 1.25rem;
+      margin: 2rem 0;
+      line-height: 1.6;
+    }
+
+    .destinations-block {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(80,191,204,0.25);
+      border-radius: 16px;
+      padding: 2rem 1.75rem;
+      position: sticky;
+      top: 2rem;
+    }
+
+    .destinations-block h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--teal-light);
+      margin-bottom: 1.5rem;
+    }
+
+    .destinations-list {
+      list-style: none;
+    }
+
+    .destinations-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      font-size: 1rem;
+      color: rgba(255,255,255,0.88);
+      font-weight: 300;
+    }
+
+    .destinations-list li:last-child { border-bottom: none; }
+
+    .dest-marker {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--golden);
+      flex-shrink: 0;
+    }
+
+    .destinations-note {
+      margin-top: 1.25rem;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.35);
+      font-style: italic;
+      line-height: 1.5;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--sand);
+      color: #a09070;
+      text-align: center;
+      padding: 4rem 2rem 3rem;
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+    }
+
+    .footer-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 300;
+      color: var(--teal-deep);
+      margin-bottom: 0.4rem;
+    }
+
+    .footer-tagline {
+      font-style: italic;
+      color: var(--text-warm);
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <span class="logo-mark">IslandMe LLC</span>
+    <h1>Island<em>Me</em></h1>
+    <p class="tagline">close your eyes &mdash; you're already there.</p>
+    <p class="sub-tagline">feel it wherever you are</p>
+  </header>
+
+  <!-- FEATURES -->
+  <section id="features">
+    <div class="section-wrap">
+      <span class="eyebrow">on the horizon</span>
+      <h2>Features <span class="coming-soon-badge">Coming Soon</span></h2>
+      <p class="section-intro">Good things are growing. Here's what's coming your way.</p>
+
+      <div class="features-grid">
+
+        <div class="feature-card">
+          <span class="feature-icon">&#127754;</span>
+          <h3>Alarm Clock</h3>
+          <p>Rise gently. Let the tide ease you from sleep &mdash; no sharp buzz, just the sea calling you into your morning.</p>
+        </div>
+
+        <div class="feature-card">
+          <span class="feature-icon">&#129497;</span>
+          <h3>Meditation Timer</h3>
+          <p>Find your still water. Sit with the sounds of the island and let the whole world soften around you.</p>
+        </div>
+
+        <div class="feature-card">
+          <span class="feature-icon">&#127807;</span>
+          <h3>Habit Tracker</h3>
+          <p>Flow like the tide &mdash; consistent, unhurried, always returning. Grow the life you want, one easy rhythm at a time.</p>
+        </div>
+
+        <div class="feature-card">
+          <span class="feature-icon">&#127758;</span>
+          <h3>Explorer Page</h3>
+          <p>Islands hold stories as old as the sea. Wander through their maritime, cultural, scientific, and biological wonders.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- WAVE DIVIDER -->
+  <div class="wave-divider">
+    <svg viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,45 C240,90 480,10 720,50 C960,90 1200,15 1440,45 L1440,90 L0,90 Z" fill="#0e3a42"/>
+    </svg>
+  </div>
+
+  <!-- SOUND SECTION -->
+  <section id="sound">
+    <div class="section-wrap">
+      <span class="eyebrow">IslandMe Original Content</span>
+      <h2>The Sound of Islands</h2>
+      <p class="section-intro">Some of the most beautiful things on this earth can&rsquo;t be photographed.</p>
+
+      <div class="sound-body">
+
+        <div class="sound-copy">
+          <p>
+            There is a feeling you get on an island. Maybe you&rsquo;ve stood at the edge of something wild and listened to waves carve themselves against rock far below. Maybe you&rsquo;ve walked barefoot as the sun went sideways and turned the whole world golden. Maybe a bird called out from somewhere deep in the canopy and you stopped walking entirely &mdash; just to hear it again.
+          </p>
+
+          <div class="pull-quote">
+            &ldquo;That deep, wordless exhale &mdash; that&rsquo;s what IslandMe is for.&rdquo;
+          </div>
+
+          <p>
+            Islands carry a soundscape unlike anywhere else on Earth. The unhurried crash of surf against volcanic rock. Wind threading through palm canopies. The calls of creatures found nowhere else in the world. These sounds <strong>slow the mind, open the breath, and return us to something real</strong>.
+          </p>
+
+          <p>
+            The mission of IslandMe is to make this mesmerizing piece of nature a living, breathing part of your everyday experience. That&rsquo;s why IslandMe LLC is out in the world creating long-form, high-quality field recordings &mdash; the kind that carry you to places of peace, solitude, and escape that so many of us dream about and so few of us can reach on any given day.
+          </p>
+
+          <p>
+            These are <strong>not loops</strong>. Not algorithms. Not studio ambience. They are real places, alive and breathing, captured with deep care &mdash; and they&rsquo;re waiting for you, wherever you happen to be.
+          </p>
+        </div>
+
+        <div class="destinations-block">
+          <h3>Where we&rsquo;re headed first</h3>
+          <ul class="destinations-list">
+            <li><span class="dest-marker"></span>Spain</li>
+            <li><span class="dest-marker"></span>Germany</li>
+            <li><span class="dest-marker"></span>United States of America</li>
+            <li><span class="dest-marker"></span>Ecuador</li>
+          </ul>
+          <p class="destinations-note">More destinations to follow &mdash; the islands of this world are many and we intend to listen to all of them.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p class="footer-name">IslandMe</p>
+    <p class="footer-tagline">feel it wherever you are</p>
+    <p>&copy; 2026 IslandMe LLC &mdash; All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
