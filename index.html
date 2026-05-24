@@ -475,12 +475,13 @@
             <span class="doc-label">White Pages</span>
             <span class="doc-type">PDF</span>
           </a>
-          <a class="about-doc-link" href="assets/docs/donations.tsv" download>
+          <button class="about-doc-link" id="donations-toggle" onclick="toggleDonations()">
             <span class="doc-icon">&#128202;</span>
             <span class="doc-label">Donations</span>
-            <span class="doc-type">TSV</span>
-          </a>
+            <span class="doc-type" id="donations-badge">Expand</span>
+          </button>
         </div>
+        <div id="donations-table-wrap"></div>
       </div>
 
     </div>
@@ -546,5 +547,80 @@
     <p>&copy; 2026 IslandMe LLC &mdash; All rights reserved.</p>
   </footer>
 
+  <style>
+    button.about-doc-link {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(80,191,204,0.3);
+      cursor: pointer;
+      font-family: inherit;
+      text-align: left;
+    }
+    button.about-doc-link:hover {
+      background: rgba(255,255,255,0.14);
+      border-color: var(--teal-light);
+      transform: translateY(-2px);
+    }
+    #donations-table-wrap {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.35s ease, margin-top 0.35s ease;
+      margin-top: 0;
+    }
+    #donations-table-wrap.open {
+      max-height: 600px;
+      margin-top: 1.5rem;
+    }
+    .donations-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.88);
+    }
+    .donations-table th {
+      font-family: 'Lato', sans-serif;
+      font-weight: 400;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--teal-light);
+      border-bottom: 1px solid rgba(80,191,204,0.3);
+      padding: 0.5rem 0.75rem;
+      text-align: left;
+    }
+    .donations-table td {
+      padding: 0.65rem 0.75rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      font-weight: 300;
+    }
+    .donations-table tr:last-child td { border-bottom: none; }
+  </style>
+
+  <script>
+    var _donationsLoaded = false;
+    function toggleDonations() {
+      var wrap = document.getElementById('donations-table-wrap');
+      var badge = document.getElementById('donations-badge');
+      var isOpen = wrap.classList.toggle('open');
+      badge.textContent = isOpen ? 'Collapse' : 'Expand';
+      if (isOpen && !_donationsLoaded) {
+        fetch('assets/docs/donations.tsv')
+          .then(function(r){ return r.text(); })
+          .then(function(text){
+            var lines = text.trim().split('\n').map(function(l){ return l.split('\t'); });
+            var html = '<table class="donations-table"><thead><tr>';
+            lines[0].forEach(function(h){ html += '<th>' + h + '</th>'; });
+            html += '</tr></thead><tbody>';
+            for (var i = 1; i < lines.length; i++) {
+              html += '<tr>';
+              lines[i].forEach(function(c){ html += '<td>' + c + '</td>'; });
+              html += '</tr>';
+            }
+            html += '</tbody></table>';
+            wrap.innerHTML = html;
+            _donationsLoaded = true;
+          });
+      }
+    }
+  </script>
 </body>
 </html>
