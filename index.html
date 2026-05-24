@@ -206,6 +206,73 @@
       line-height: 1.65;
     }
 
+    /* ── ABOUT BANNER ── */
+    .about-banner {
+      margin-top: 3.5rem;
+      background: linear-gradient(135deg, #0b2e38 0%, #1a5f68 100%);
+      border-radius: 20px;
+      padding: 2.5rem 2.5rem 2.25rem;
+      color: var(--white);
+    }
+
+    .about-banner-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 300;
+      color: var(--white);
+      margin-bottom: 1.75rem;
+      letter-spacing: 0.02em;
+      line-height: 1.2;
+    }
+
+    .about-docs {
+      display: flex;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .about-doc-link {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(80,191,204,0.3);
+      border-radius: 12px;
+      padding: 1rem 1.5rem;
+      text-decoration: none;
+      color: var(--white);
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+      flex: 1;
+      min-width: 180px;
+    }
+
+    .about-doc-link:hover {
+      background: rgba(255,255,255,0.14);
+      border-color: var(--teal-light);
+      transform: translateY(-2px);
+    }
+
+    .doc-icon { font-size: 1.6rem; flex-shrink: 0; }
+
+    .doc-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      flex: 1;
+    }
+
+    .doc-type {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--teal-light);
+      font-family: 'Lato', sans-serif;
+      font-weight: 400;
+      border: 1px solid rgba(80,191,204,0.4);
+      padding: 0.15em 0.55em;
+      border-radius: 4px;
+    }
+
     /* ── WAVE DIVIDER ── */
     .wave-divider {
       width: 100%;
@@ -360,8 +427,8 @@
   <header>
     <span class="logo-mark">IslandMe LLC</span>
     <h1>Island<em>Me</em></h1>
-    <p class="tagline">close your eyes &mdash; you're already there.</p>
-    <p class="sub-tagline">feel it wherever you are</p>
+    <p class="tagline">Break continuity.</p>
+    <p class="sub-tagline">The important history, sounds, and nature of islands &mdash; enjoy it, use it, support it.</p>
   </header>
 
   <!-- FEATURES -->
@@ -376,19 +443,19 @@
         <div class="feature-card">
           <span class="feature-icon">&#127754;</span>
           <h3>Alarm Clock</h3>
-          <p>Rise gently. Let the tide ease you from sleep &mdash; no sharp buzz, just the sea calling you into your morning.</p>
+          <p>Wake to sounds with a story. The calls of recently extinct birds. The howl of an Alaskan wolf. The breath of Pacific volcanoes. These are precious, irreplaceable sounds &mdash; and they deserve to be the first thing you hear.</p>
         </div>
 
         <div class="feature-card">
-          <span class="feature-icon">&#129497;</span>
+          <span class="feature-icon">&#129496;</span>
           <h3>Meditation Timer</h3>
           <p>Find your still water. Sit with the sounds of the island and let the whole world soften around you.</p>
         </div>
 
         <div class="feature-card">
-          <span class="feature-icon">&#127807;</span>
+          <span class="feature-icon">&#129517;</span>
           <h3>Habit Tracker</h3>
-          <p>Flow like the tide &mdash; consistent, unhurried, always returning. Grow the life you want, one easy rhythm at a time.</p>
+          <p>Every navigator needs a heading. Chart your course day by day, and watch the islands of your goals rise on the horizon &mdash; deliberate, reachable, earned. Your best self is not far off; it is simply an island you haven&rsquo;t reached yet.</p>
         </div>
 
         <div class="feature-card">
@@ -398,6 +465,24 @@
         </div>
 
       </div>
+
+      <!-- ABOUT BANNER -->
+      <div class="about-banner">
+        <h3 class="about-banner-heading">What is IslandMe about?</h3>
+        <div class="about-docs">
+          <a class="about-doc-link" href="assets/docs/white-pages.pdf" target="_blank">
+            <span class="doc-icon">&#128196;</span>
+            <span class="doc-label">White Pages</span>
+            <span class="doc-type">PDF</span>
+          </a>
+          <a class="about-doc-link" href="assets/docs/donations.tsv" download>
+            <span class="doc-icon">&#128202;</span>
+            <span class="doc-label">Donations</span>
+            <span class="doc-type">TSV</span>
+          </a>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -457,7 +542,7 @@
   <!-- FOOTER -->
   <footer>
     <p class="footer-name">IslandMe</p>
-    <p class="footer-tagline">feel it wherever you are</p>
+    <p class="footer-tagline">The important history, sounds, and nature of islands &mdash; enjoy it, use it, support it.</p>
     <p>&copy; 2026 IslandMe LLC &mdash; All rights reserved.</p>
   </footer>
 
